@@ -13,3 +13,4 @@ Pada kompetisi ini, performa model akan dievaluasi menggunakan metrik Accuracy. 
 Rumus Accuracy:
 
 Accuracy=Jumlah Prediksi Benar : Jumlah Total Observasi
+![image](https://github.com/user-attachments/assets/08809840-dc5e-4eee-a800-9dc2922fdaf5)
