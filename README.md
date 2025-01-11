@@ -28,6 +28,12 @@ Model **`MobileNetV3Berdiri`** adalah model deep learning berbasis arsitektur **
 
 Setelah fitur diekstraksi oleh backbone, model menggunakan classifier custom yang terdiri dari beberapa lapisan fully connected dengan ukuran awal 512 neuron. Lapisan ini dilengkapi dengan **batch normalization**, fungsi aktivasi **ReLU**, dan **dropout** untuk mengurangi overfitting. Akhirnya, model menghasilkan output dua kelas melalui lapisan linear terakhir.
 
+Model **`MobileNetV3TidakBerdiri`** adalah model klasifikasi gambar yang menggabungkan efisiensi backbone **MobileNetV3-Large** dengan mekanisme perhatian tambahan berbasis **CBAM (Convolutional Block Attention Module)**. MobileNetV3 digunakan sebagai feature extractor, di mana lapisan classifier bawaan dihapus dan digantikan oleh lapisan custom. Fitur yang dihasilkan oleh backbone diproses lebih lanjut oleh CBAM, yang secara adaptif memberikan perhatian pada saluran dan dimensi spasial untuk meningkatkan representasi fitur penting.
+
+CBAM bekerja melalui dua tahap: **channel attention**, yang memprioritaskan saluran berdasarkan informasi global, dan **spatial attention**, yang memfokuskan perhatian pada lokasi spasial penting. Untuk menjaga konsistensi dimensi, model menggunakan koneksi residual yang menggabungkan fitur asli dan fitur yang diperkuat oleh CBAM. Setelah itu, fitur diringkas menggunakan **adaptive average pooling**, diratakan, dan diproses oleh lapisan fully connected yang dilengkapi dengan **batch normalization**, **ReLU**, dan **dropout** untuk klasifikasi dua kelas.
+
+Model ini dioptimalkan menggunakan **AdamW**, dengan pengaturan learning rate yang disesuaikan melalui scheduler **StepLR**. Dengan penambahan CBAM dan fine-tuning pada MobileNetV3, model ini dirancang untuk menghasilkan performa yang lebih baik dalam klasifikasi dengan mempertahankan efisiensi komputasi.
+
 # Kesimpulan
 - <p style="font-size:18px;">Kualitas Dataset: Dataset yang kami gunakan sangat tidak bersih, sehingga memerlukan langkah pra-pemrosesan yang intensif untuk memastikan data siap digunakan dalam pemodelan.
 
