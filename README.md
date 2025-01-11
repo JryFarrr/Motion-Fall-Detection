@@ -13,4 +13,30 @@ Pada kompetisi ini, performa model akan dievaluasi menggunakan metrik Accuracy. 
 Rumus Accuracy:
 
 Accuracy=Jumlah Prediksi Benar : Jumlah Total Observasi
+
+# Alur Pengerjaan
 ![image](https://github.com/user-attachments/assets/08809840-dc5e-4eee-a800-9dc2922fdaf5)
+
+Diagram di atas merupakan gambaran umum mengenai tahapan-tahapan penyelesaian masalah yang dilakukan dalam notebook ini. Dalam melakukan pengklasifikasian data, kami menggunakan dua pendekatan sebagai berikut :
+- Temporal Frame - Pendekatan ini menggunakan penggabungan frame dalam urutan tertentu melalui *stacking* (Menumpuk frame dalam beberapa tumpukan yang telah ditentukan) yang menggunakan model 3D.
+- Single Frame - Pendekatan ini menggunakan frame per satuan yang akan diprediksi menggunakan model 2D.
+
+Penjelasan lebih detail setiap tahapan dan metode yang digunakan dapat ditemukan di bab selanjutnya
+
+# Model
+Model **`MobileNetV3Berdiri`** adalah model deep learning berbasis arsitektur **MobileNetV3-Large**, yang dioptimalkan untuk tugas klasifikasi gambar dengan efisiensi tinggi. Backbone **MobileNetV3-Large** digunakan sebagai feature extractor, di mana lapisan classifier bawaan digantikan oleh **`Identity`**, sehingga hanya fitur yang diekstraksi tanpa menghasilkan output prediksi langsung.
+
+Setelah fitur diekstraksi oleh backbone, model menggunakan classifier custom yang terdiri dari beberapa lapisan fully connected dengan ukuran awal 512 neuron. Lapisan ini dilengkapi dengan **batch normalization**, fungsi aktivasi **ReLU**, dan **dropout** untuk mengurangi overfitting. Akhirnya, model menghasilkan output dua kelas melalui lapisan linear terakhir.
+
+# Kesimpulan
+- <p style="font-size:18px;">Kualitas Dataset: Dataset yang kami gunakan sangat tidak bersih, sehingga memerlukan langkah pra-pemrosesan yang intensif untuk memastikan data siap digunakan dalam pemodelan.
+
+- <p style="font-size:18px;">Untuk klasifikasi gerakan non_fall dan fall, didapatkan akurasi sebesar 0.93 dengan metode Temporal Frame dan didapatkan akurasi sebesar 0.95 dengan metode Single Frame yang keduanya merupakan skor yang didapatkan di sistem Kaggle. Metode yang kami gunakan dalam Temporal Frame berdasarkan paper dari [link text](https://pmc.ncbi.nlm.nih.gov/articles/PMC9470335/#sec4) menunjukkan performa yang cukup. Akan tetapi, jika dibandingkan menggunakan single frame didapatkan performa yang lebih bagus. Metode single frame berdasarkan analisis kami pada data train yang disediakan terhadap anomali data yang bisa saja diprediksi salah oleh metode sebelumnya.
+
+- <p style="font-size:18px;"> Model : Dalam melakukan deteksi menggunakan metode Single Frame kita menggunakan arsitektur Mobilenet_v3_large dan untuk metode Temporal Frame menggunakan arsitektur M3D_18 dengan penambahan Attention Layer
+
+
+- <p style="font-size:18px;" Proses Deteksi Gambar > Kami menggunakan arsitektur YOLO_V5 untuk proses deteksi gambar untuk membedakan berdiri dan tidak_berdiri.
+
+# Big Thanks to 
+@eldntr @fadhel sebagai satu tim saya yang menyumbangkan kemampuan coding dan pemikirannya pada projek ini
