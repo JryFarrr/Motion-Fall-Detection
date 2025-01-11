@@ -39,4 +39,5 @@ Setelah fitur diekstraksi oleh backbone, model menggunakan classifier custom yan
 - <p style="font-size:18px;" Proses Deteksi Gambar > Kami menggunakan arsitektur YOLO_V5 untuk proses deteksi gambar untuk membedakan berdiri dan tidak_berdiri.
 
 # Big Thanks to 
-@eldntr @fadhel sebagai satu tim saya yang menyumbangkan kemampuan coding dan pemikirannya pada projek ini
+[@eldntr](https://github.com/eldntr) [@fadhel](https://github.com/fadhel) sebagai satu tim saya yang menyumbangkan kemampuan coding dan pemikirannya pada proyek ini.
+
